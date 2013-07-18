@@ -1,0 +1,32 @@
+{
+  "name": "node-s2serial",
+  "version": "0.0.1",
+  "description": "Streams2 frontend for node-serialport",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit ./test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mharsch/node-s2serial.git"
+  },
+  "keywords": [
+    "serialport",
+    "serial"
+  ],
+  "dependencies" : {
+    "serialport" : ">=1.1.1"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.7.4"
+  },
+  "author": "Michael Harsch (mike@harschsystems.com)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/mharsch/node-s2serial/issues"
+  }
+}

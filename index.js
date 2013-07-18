@@ -13,19 +13,44 @@ function S2Serial(path, options) {
 	this.tx = new Writable();
 
 	this.tx._write = function _write(buf, encoding, callback) {
-		self._serialport.write(buf, callback);
+		self._serialport.write(buf, function (err, res) {
+			if (err) {
+				callback(err);
+				return;
+			}
+
+			if (res && res != buf.length) {
+				callback(new Error("write error: " +
+				    "wrote %d bytes, expected to write %d",
+				    res, buf.length));
+				return;
+			}
+			callback()
+		});
 	};
 
 	this._serialport.on('open', function () {
 		self.emit('open');
 	});
+
+	this._serialport.on('close', function () {
+		self.emit('close');
+	});
 };
+
+util.inherits(S2Serial, EventEmitter);
 
 S2Serial.prototype.open = function open(cb) {
 	this._serialport.open(cb);
-}
+};
 
-util.inherits(S2Serial, EventEmitter);
+S2Serial.prototype.close = function close(cb) {
+	this._serialport.close(cb);
+};
+
+S2Serial.prototype.flush = function flush(cb) {
+	this._serialport.flush(cb)
+};
 
 module.exports = {
 	S2Serial: S2Serial
