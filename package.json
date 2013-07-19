@@ -1,5 +1,5 @@
 {
-  "name": "node-s2serial",
+  "name": "s2serial",
   "version": "0.0.1",
   "description": "Streams2 frontend for node-serialport",
   "main": "index.js",
