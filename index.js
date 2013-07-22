@@ -38,13 +38,13 @@ function S2Serial(path, options) {
 	this._serialport.on('close', function () {
 		self.emit('close');
 	});
+
+	this.open = this._serialport.open;
+	this.close = this._serialport.close;
+	this.flush = this._serialport.flush;
 };
 
 util.inherits(S2Serial, Duplex);
-
-S2Serial.prototype.open = this._serialport.open;
-S2Serial.prototype.close = this._serialport.close;
-S2Serial.prototype.flush = this._serialport.flush;
 
 module.exports = {
 	S2Serial: S2Serial
