@@ -6,6 +6,11 @@ var util = require('util');
 function S2Serial(path, options) {
 	Duplex.call(this);
 	var self = this;
+
+	// strip parser option if set.  Force default (raw)
+	if (options.parser)
+		options.parser = undefined;
+
 	this._serialport = new SerialPort(path, options);
 
 	this.wrap(this._serialport);
