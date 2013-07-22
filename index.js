@@ -1,18 +1,16 @@
 var SerialPort = require('serialport').SerialPort;
-var Readable = require('stream').Readable;
-var Writable = require('stream').Writable;
+var Duplex = require('stream').Duplex;
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
 function S2Serial(path, options) {
-	EventEmitter.call(this);
+	Duplex.call(this);
 	var self = this;
 	this._serialport = new SerialPort(path, options);
 
-	this.rx = new Readable().wrap(this._serialport);
-	this.tx = new Writable();
+	this.wrap(this._serialport);
 
-	this.tx._write = function _write(buf, encoding, callback) {
+	this._write = function _write(buf, encoding, callback) {
 		self._serialport.write(buf, function (err, res) {
 			if (err) {
 				callback(err);
@@ -38,7 +36,7 @@ function S2Serial(path, options) {
 	});
 };
 
-util.inherits(S2Serial, EventEmitter);
+util.inherits(S2Serial, Duplex);
 
 S2Serial.prototype.open = function open(cb) {
 	this._serialport.open(cb);
