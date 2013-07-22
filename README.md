@@ -6,9 +6,9 @@ A Streams2 frontend for
 ##Usage:
 
 The S2Serial implements the same API as node-serialport except: 
-* A.) The `parser` option is ignored (forcing `raw` mode)
-and
-* B.) The returned object implements a 
+
+* The `parser` option is ignored (forcing `raw` mode)
+* The returned object implements a 
 [Duplex Stream](http://nodejs.org/api/stream.html#stream_class_stream_duplex)
 
 
