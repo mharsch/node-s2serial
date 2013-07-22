@@ -16,7 +16,6 @@ function S2Serial(path, options) {
 				callback(err);
 				return;
 			}
-
 			if (res && res != buf.length) {
 				callback(new Error("write error: " +
 				    "wrote %d bytes, expected to write %d",
@@ -38,17 +37,9 @@ function S2Serial(path, options) {
 
 util.inherits(S2Serial, Duplex);
 
-S2Serial.prototype.open = function open(cb) {
-	this._serialport.open(cb);
-};
-
-S2Serial.prototype.close = function close(cb) {
-	this._serialport.close(cb);
-};
-
-S2Serial.prototype.flush = function flush(cb) {
-	this._serialport.flush(cb)
-};
+S2Serial.prototype.open = this._serialport.open;
+S2Serial.prototype.close = this._serialport.close;
+S2Serial.prototype.flush = this._serialport.flush;
 
 module.exports = {
 	S2Serial: S2Serial
